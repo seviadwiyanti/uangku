@@ -9,6 +9,7 @@ class CategoryPage extends StatefulWidget {
 }
 
 class _CategoryPageState extends State<CategoryPage> {
+  bool isExpense = true;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -20,14 +21,58 @@ class _CategoryPageState extends State<CategoryPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Switch(
-                value: true,
-                onChanged: (bool value) {},
+                value: isExpense,
+                onChanged: (bool value) {
+                  setState(() {
+                    isExpense = value;
+                  });
+                },
                 inactiveTrackColor: Colors.green[200],
                 inactiveThumbColor: Colors.green,
                 activeColor: Colors.red,
               ),
               IconButton(onPressed: () {}, icon: Icon(Icons.add))
             ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Card(
+            elevation: 10,
+            child: ListTile(
+              leading: (isExpense)
+                  ? Icon(Icons.upload, color: Colors.red)
+                  : Icon(Icons.download, color: Colors.green),
+              title: Text("Sedekah"),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
+                  SizedBox(width: 10),
+                  IconButton(onPressed: () {}, icon: Icon(Icons.edit))
+                ],
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Card(
+            elevation: 10,
+            child: ListTile(
+              leading: (isExpense)
+                  ? Icon(Icons.upload, color: Colors.red)
+                  : Icon(Icons.download, color: Colors.green),
+              title: Text("Sedekah"),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
+                  SizedBox(width: 10),
+                  IconButton(onPressed: () {}, icon: Icon(Icons.edit))
+                ],
+              ),
+            ),
           ),
         )
       ],
