@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CategoryPage extends StatefulWidget {
   const CategoryPage({super.key});
@@ -10,6 +11,56 @@ class CategoryPage extends StatefulWidget {
 
 class _CategoryPageState extends State<CategoryPage> {
   bool isExpense = true;
+
+  void openDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: SingleChildScrollView(
+            child: Center(
+                child: Column(
+              children: [
+                Text(
+                  (isExpense) ? "Add expense" : "Add income",
+                  style: GoogleFonts.montserrat(
+                      fontSize: 18,
+                      color: (isExpense) ? Colors.red : Colors.green),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(), hintText: "Name"),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                // ElevatedButton(onPressed: () {}, child: Text("Save"))
+              ],
+            )),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Cancel"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                // Add category logic here
+                Navigator.of(context).pop();
+              },
+              child: Text("Add"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,7 +82,11 @@ class _CategoryPageState extends State<CategoryPage> {
                 inactiveThumbColor: Colors.green,
                 activeColor: Colors.red,
               ),
-              IconButton(onPressed: () {}, icon: Icon(Icons.add))
+              IconButton(
+                  onPressed: () {
+                    openDialog();
+                  },
+                  icon: Icon(Icons.add))
             ],
           ),
         ),
